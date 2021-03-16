@@ -1,0 +1,102 @@
+<mat-card>Administrar Candidatos
+ 
+        <button class="button-headers" mat-raised-button (click)="openDialog()">Agregar Candidato</button>
+
+</mat-card>
+
+<mat-card>Búsqueda
+  <form  class="contenedor-serch" [formGroup]="search" (ngSubmit)="searchData(search)">
+
+    <mat-form-field>
+         <input matInput
+                type="text"
+                placeholder="Nombre"
+                formControlName="name">
+     
+    </mat-form-field>
+    <mat-form-field> 
+         <input matInput
+                type="text"
+                placeholder="Apellido"
+                formControlName="surname">
+    </mat-form-field>
+    <mat-form-field>  
+         <input matInput
+                type="text"
+                placeholder="email"
+                formControlName="email">
+     
+    </mat-form-field>
+    <mat-form-field>  
+         <input matInput
+                type="date"
+                placeholder="Fecha Inicio Entrevista"
+                formControlName="date_start">
+    </mat-form-field>
+    <mat-form-field>  
+         <input matInput
+                type="date"
+                placeholder="Fecha Final Entrevista"
+                formControlName="date_end">
+    </mat-form-field>
+     <mat-form-field>  
+         <input matInput
+                type="number"
+                placeholder="Calificación"
+                formControlName="qualification">
+    </mat-form-field>
+       
+    <button class="button-headers" mat-raised-button  type="submit">Buscar</button>
+    
+  </form> 
+ 
+  
+</mat-card>
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">  
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef> Nombre </th>
+    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="surname">
+    <th mat-header-cell *matHeaderCellDef> Apellidos </th>
+    <td mat-cell *matCellDef="let element"> {{element.surname}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="email">
+    <th mat-header-cell *matHeaderCellDef> Email </th>
+    <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="phone">
+    <th mat-header-cell *matHeaderCellDef> Telefono </th>
+    <td mat-cell *matCellDef="let element"> {{element.phone}} </td>
+  </ng-container>
+  <ng-container matColumnDef="date_of_interview">
+    <th mat-header-cell *matHeaderCellDef> Fecha Entrevista </th>
+    <td mat-cell *matCellDef="let element"> {{element.date_of_interview}} </td>
+  </ng-container>
+  <ng-container matColumnDef="qualification">
+    <th mat-header-cell *matHeaderCellDef> Calificación </th>
+    <td mat-cell *matCellDef="let element"> {{element.qualification}} </td>
+  </ng-container>
+   <!-- Get Details -->
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef> Acciones </th>
+      <td mat-cell *matCellDef="let element"> 
+      	<button mat-mini-fab color="primary" aria-label="editar" (click)="edit(element.id)">
+          <mat-icon>edit</mat-icon>
+        </button> 
+        <button mat-mini-fab color="accent" aria-label="Ver">
+          <mat-icon>visibility</mat-icon>
+        </button> 
+        <button mat-mini-fab color="warn" aria-label="Eliminar" (click)="deleteCandidate(element.id)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+<mat-paginator [pageSizeOptions]="[10, 15]" showFirstLastButtons></mat-paginator>

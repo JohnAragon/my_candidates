@@ -1,0 +1,11 @@
+.contenedor-form {
+    display: flex;
+    flex-direction: row;
+    margin:1rem auto;
+    width:400px;
+    max-width: 600px;
+} 
+
+mat-form-field {
+  margin-right: 12px;
+}
